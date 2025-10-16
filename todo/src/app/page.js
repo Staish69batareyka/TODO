@@ -2,7 +2,7 @@
 
 import Task from "@/app/Task";
 import {data} from './db'
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
 export default function Home() {
     // инициализация состояния
@@ -10,6 +10,23 @@ export default function Home() {
 
     // Отдельное состояние для input
     const [inputValue, setInputValue] = useState('')
+
+
+    //Загружаем всё из LocalStorage
+    useEffect(() => {
+        const savedTasks = localStorage.getItem(JSON.stringify('tasks'))
+        if(savedTasks){
+            setTasks(JSON.parse(savedTasks))
+        }
+    }, []);
+
+
+    // Сохраняем при каждом изменении
+    // Без useEffect будет бесконечно запускаться
+    useEffect(() => {
+        localStorage.setItem('task', JSON.stringify(tasks))
+    }, [tasks])
+
 
 
     // Функция для button
