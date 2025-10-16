@@ -1,6 +1,8 @@
 "use client"
 
 import Task from "@/app/Task";
+import Authorization from './Authorization'
+import Identification from "./user/Identification"
 import {data} from './db'
 import {useEffect, useState} from "react";
 
@@ -84,6 +86,8 @@ export default function Home() {
 
   return (
     <>
+        <Authorization></Authorization>
+        <Identification></Identification>
         <div>
             <input
                 type="text"
