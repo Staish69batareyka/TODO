@@ -6,26 +6,47 @@ import {useEffect, useState} from "react";
 
 export default function Home() {
     // инициализация состояния
-    const [tasks, setTasks] = useState(data)
+    const [tasks, setTasks] = useState([])
 
     // Отдельное состояние для input
     const [inputValue, setInputValue] = useState('')
 
+    // Для проверки, что мы на стороне клиента
+    const [isClient, setIsClient] = useState(false)
+
+
+    // Проверка, что мы на стороне клиента
+    useEffect(() => {
+        setIsClient(true)
+    }, [])
+
 
     //Загружаем всё из LocalStorage
     useEffect(() => {
-        const savedTasks = localStorage.getItem(JSON.stringify('tasks'))
-        if(savedTasks){
-            setTasks(JSON.parse(savedTasks))
+        if(isClient){
+            try{
+                const savedTasks = localStorage.getItem('tasks') // Находим по ключу
+                if(savedTasks){
+                    setTasks(JSON.parse(savedTasks))
+                }
+            } catch {
+                console.log('не загрузилось')
+            }
         }
-    }, []);
+    }, [isClient]);
 
 
     // Сохраняем при каждом изменении
     // Без useEffect будет бесконечно запускаться
     useEffect(() => {
-        localStorage.setItem('task', JSON.stringify(tasks))
-    }, [tasks])
+        if(isClient){
+            try{
+                localStorage.setItem('tasks', JSON.stringify(tasks))
+            } catch {
+                console.log('не загрузилось х2')
+            }
+        }
+    }, [tasks, isClient])
 
 
 
@@ -57,7 +78,9 @@ export default function Home() {
             handleAddTask()
         }
     }
-
+    if (!isClient) {
+        return <div>Загрузка...</div>;
+    }
 
   return (
     <>
