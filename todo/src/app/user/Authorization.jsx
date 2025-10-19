@@ -3,8 +3,8 @@ export default function Authorization(){
         <>
             <div>
                 <input type='text' placeholder='Login'/>
-                <input type='text' placeholder='Password'/>
-                <input type='text' placeholder='Password again'/>
+                <input type='password' placeholder='Password'/>
+                <input type='password' placeholder='Password again'/>
                 <button type='submit'>Submit</button>
                 <p>Y may<a>SIGN IN</a></p>
             </div>

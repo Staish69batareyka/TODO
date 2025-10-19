@@ -3,7 +3,7 @@ export default function Identification(){
         <>
             <div>
                 <input type='text' value='Login'/>
-                <input type='text' value='Password'/>
+                <input type='password' value='Password'/>
                 <button type='submit'>Submit</button>
             </div>
         </>
