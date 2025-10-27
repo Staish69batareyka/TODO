@@ -8,6 +8,10 @@ export default function Home() {
 
 
   return (
-    <HomePage></HomePage>
+      <>
+          <Authorization></Authorization>
+          <Identification></Identification>
+          <HomePage></HomePage>
+      </>
   );
 }
